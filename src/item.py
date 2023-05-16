@@ -23,6 +23,7 @@ class Item:
         self.__name = name
         self.price = price
         self.quantity = quantity
+        self.all.append(self)
 
     def calculate_total_price(self) -> float:
         """
@@ -36,7 +37,7 @@ class Item:
         """
         Применяет установленную скидку для конкретного товара.
         """
-        self.price = self.price * self.pay_rate
+        self.price *= self.pay_rate
 
     @property
     def name(self):
@@ -51,6 +52,7 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
+        """Инициализирует экземпляры класса Item из данных файла items.csv"""
         with open(FILE_CSV, newline='', encoding='windows-1251') as file:
             reader = csv.DictReader(file)
             for row in reader:
@@ -58,6 +60,7 @@ class Item:
 
     @staticmethod
     def string_to_number(amount):
+        """Преабразует строку в число"""
         num_float = float(amount)
         num_int = int(num_float)
         return num_int
