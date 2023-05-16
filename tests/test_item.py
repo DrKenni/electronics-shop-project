@@ -13,7 +13,3 @@ class Test_Item:
         example.pay_rate = 0.9
         example.apply_discount()
         assert example.price == 90
-
-
-
-
