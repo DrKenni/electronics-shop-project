@@ -53,10 +53,14 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls):
         """Инициализирует экземпляры класса Item из данных файла items.csv"""
+        cls.all = []
         with open(FILE_CSV, newline='', encoding='windows-1251') as file:
             reader = csv.DictReader(file)
             for row in reader:
-                cls.all.append(cls(row['name'], row['price'], row['quantity']))
+                name = row['name']
+                price = cls.string_to_number(row['price'])
+                quantity = cls.string_to_number(row['quantity'])
+                cls(name, price, quantity)
 
     @staticmethod
     def string_to_number(amount):
