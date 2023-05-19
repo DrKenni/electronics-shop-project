@@ -4,6 +4,14 @@ from src.item import Item
 
 class Test_Item:
 
+    def test___repr__(self):
+        item1 = Item("Смартфон", 10000, 20)
+        assert repr(item1) == "Item('Смартфон', 10000, 20)"
+
+    def test___str__(self):
+        item1 = Item("Смартфон", 10000, 20)
+        assert str(item1) == 'Смартфон'
+
     def test_calculate_total_price(self):
         example = Item("Apple", 15, 67)
         assert example.calculate_total_price() == 1005
