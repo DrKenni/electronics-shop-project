@@ -2,6 +2,8 @@ from src.phone import Phone
 from src.item import Item
 import pytest
 
+"""Тесты класса Phone"""
+
 phone = Phone("iPhone 14", 120_000, 5, 2)
 
 
