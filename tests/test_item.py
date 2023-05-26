@@ -1,5 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 from src.item import Item
+import pytest
 
 
 class Test_Item:
@@ -27,7 +28,8 @@ class Test_Item:
         assert item.name == 'Телефон'
         item.name = 'Смартфон'
         assert item.name == 'Смартфон'
-        item.name = 'СуперСмартфон'
+        with pytest.raises(TypeError):
+            item.name = 'СуперСмартфон'
         assert item.name == 'Смартфон'
 
     def test_instantiate_from_csv(self):
