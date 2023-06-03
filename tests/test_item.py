@@ -1,6 +1,8 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 import pytest
+import csv
+import os
 
 
 class Test_Item:
@@ -37,6 +39,17 @@ class Test_Item:
         assert len(Item.all) == 5
         item1 = Item.all[0]
         assert item1.name == 'Смартфон'
+
+    def test_exceptions_instantiate_from_csv(self):
+        with pytest.raises(FileNotFoundError):
+            Item.instantiate_from_csv('no_name_file')
+        open("test_file.csv", "w").close()
+        with open("test_file.csv", "w", encoding='windows-1251') as f:
+            csv.writer(f).writerows([["name", "price", "quantity"], ["Капот", "5.0"]])
+            Item.instantiate_from_csv('test_file.csv')
+        with pytest.raises(InstantiateCSVError):
+            Item.instantiate_from_csv('test_file.csv')
+        os.remove('test_file.csv')
 
     def test_string_to_number(self):
         assert Item.string_to_number('5') == 5
